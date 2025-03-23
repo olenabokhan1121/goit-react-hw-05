@@ -35,6 +35,7 @@ export default function MovieDetailsPage() {
         setIsLoading(true);
         setError(false);
         const data = await fetchMovById(movieId);
+
         setMovie(data);
       } catch {
         setError(true);
@@ -53,30 +54,31 @@ export default function MovieDetailsPage() {
 
       {isLoading && <b>Loading...</b>}
       {error && <b>Error...</b>}
-
-      <div>
-        <img
-          src={
-            movie.poster_path
-              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-              : defaultImg
-          }
-          width={250}
-          alt="poster"
-        />
-        <h3 className={css.title}>
-          {movie.title} ({movie?.release_date?.slice(0, 4)})
-        </h3>
-        <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
-        <p className={css.text}>Overview</p>
-        <p>{movie.overview}</p>
-        <p className={css.text}>Genres</p>
-        <p>
-          {movie.genres && movie.genres.length > 0
-            ? movie.genres.map(genre => genre.name).join('  ')
-            : 'Жанри відсутні'}
-        </p>
-      </div>
+      {movie && (
+        <div>
+          <img
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                : defaultImg
+            }
+            width={250}
+            alt="poster"
+          />
+          <h3 className={css.title}>
+            {movie.title}({movie?.release_date?.slice(0, 4)})
+          </h3>
+          <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
+          <p className={css.text}>Overview</p>
+          <p>{movie.overview}</p>
+          <p className={css.text}>Genres</p>
+          <p>
+            {movie.genres && movie.genres.length > 0
+              ? movie.genres.map(genre => genre.name).join('  ')
+              : 'Жанри відсутні'}
+          </p>
+        </div>
+      )}
       <h2>Additional Information</h2>
       <ul>
         <li>

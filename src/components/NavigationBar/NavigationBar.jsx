@@ -25,4 +25,3 @@ export default function NavigationBar() {
     </header>
   );
 }
-console.log(getLinkStyles);

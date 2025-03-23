@@ -40,7 +40,12 @@ export default function HomePage() {
     <>
       {isLoading && <b>Loading users...</b>}
       {error && <b>Whoops there was an error, plz reload the page...</b>}
-      {movies.length > 0 && <MovieList movies={movies} />}
+      {movies.length > 0 && (
+        <>
+          <h1>Trending today</h1>
+          <MovieList movies={movies} />
+        </>
+      )}
     </>
   );
 }
